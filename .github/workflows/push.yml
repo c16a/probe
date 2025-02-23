@@ -18,6 +18,6 @@ jobs:
         run: |
           rustup update
       - name: Build
-        run: cargo build
+        run: cargo build --release
       - name: Run tests
-        run: cargo test
+        run: cargo test --release
