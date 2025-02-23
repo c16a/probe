@@ -8,6 +8,7 @@ use std::{
     io::{self, Write},
     net::SocketAddr,
 };
+use tokio::net::lookup_host;
 use tokio::{
     io::{AsyncBufReadExt, AsyncWriteExt, BufReader},
     net::TcpStream,
@@ -20,8 +21,13 @@ pub(crate) struct TcpCommand {
     pub(crate) address: String,
 }
 
+async fn resolve_address(address: &str) -> SocketAddr {
+    let mut addrs = lookup_host(address).await.expect("Failed to resolve host");
+    addrs.next().expect("No valid addresses found")
+}
+
 pub async fn handle_request(cmd: TcpCommand) {
-    let addr: SocketAddr = cmd.address.parse().expect("Invalid address");
+    let addr = resolve_address(&cmd.address).await;
     let stream = TcpStream::connect(addr).await.expect("Failed to connect to server");
 
     let (reader, mut writer) = stream.into_split();
