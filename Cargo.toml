@@ -1,0 +1,22 @@
+[package]
+name = "pinger"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version = "1.43.0", features = ["rt-multi-thread", "rt", "macros"], default-features = false }
+hyper = { version = "1.6.0", features = ["full"] }
+hyper-rustls = "0.27.5"
+clap = { version = "4.5.28", features = ["derive"] }
+hyper-tls = "0.6.0"
+hyper-util = "0.1.10"
+http-body-util = "0.1.2"
+http-body = "1.0.1"
+
+[profile.release]
+lto = true
+opt-level = 3
+debug = false
+debug-assertions = false
+strip = true
+panic = "abort"
