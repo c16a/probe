@@ -9,10 +9,19 @@ hyper = { version = "1.6.0", features = ["client"] }
 clap = { version = "4.5.28", features = ["derive"] }
 hyper-tls = "0.6.0"
 hyper-util = { version = "0.1.10", features = ["client-legacy", "http1", "http2"] }
+tungstenite = { version = "0.26.1", features = ["rustls-tls-webpki-roots", "rustls-native-certs", "rustls-tls-native-roots"] }
+tokio-tungstenite = { version = "0.26.1", features = ["rustls-tls-webpki-roots", "rustls-native-certs", "rustls-tls-native-roots"] }
+futures-util = "0.3.31"
+rustls = { version = "0.23.22", features = ["aws-lc-rs", "ring"] }
+crossterm = "0.28.1"
+[dev-dependencies]
+hyper = { version = "1.6.0", features = ["client", "server"] }
+hyper-util = { version = "0.1.10", features = ["client-legacy", "http1", "http2", "server", "server-graceful"] }
+http-body-util = "0.1.2"
 
 [profile.release]
 lto = true
-opt-level = 3
+opt-level = "s"
 debug = false
 debug-assertions = false
 strip = true

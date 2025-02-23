@@ -22,11 +22,9 @@ async fn main() {
 
     match cli.protocol {
         Protocol::Http(cmd) => protocols::http::handle_request(cmd).await,
+        Protocol::WebSocket(cmd) => protocols::ws::handle_request(cmd).await,
         Protocol::Tcp(cmd) => {
-            println!("TCP connection to {:?} (not yet implemented)", cmd)
-        }
-        Protocol::WebSocket(cmd) => {
-            println!("WebSocket connection to {:?} (not yet implemented)", cmd)
+            println!("TcpCommand to {:?} (not yet implemented)", cmd)
         }
     }
 }

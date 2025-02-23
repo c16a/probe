@@ -2,7 +2,7 @@ use clap::Subcommand;
 
 pub mod http;
 mod tcp;
-mod ws;
+pub mod ws;
 
 #[derive(Subcommand)]
 pub(crate) enum Protocol {
